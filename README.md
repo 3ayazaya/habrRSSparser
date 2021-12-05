@@ -3,7 +3,10 @@
 
 habrRSSparser is a python script for parsing habs from habr.com via RSS and write them to PostgreSQL database.
 
+![working](https://user-images.githubusercontent.com/22868859/144743169-b5e1cb37-26bf-4504-bfae-b900ec2dbc63.gif)
+
 ## Features
+
 
 - Change sections
 - Set PostgreSQL databae scheme
