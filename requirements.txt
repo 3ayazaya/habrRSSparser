@@ -2,3 +2,5 @@ colorama==0.4.4
 feedparser==6.0.8
 loguru==0.5.3
 psycopg2==2.9.1
+python-dotenv==0.19.2
+sgmllib3k==1.0.0

@@ -1,9 +1,14 @@
+#!venv/bin/python
+
 from typing import Dict, Union, Any
 from loguru import logger
 import feedparser
 from psycopg2 import connect
 import re
+from time import strftime
+from dotenv import dotenv_values
 
+config = dotenv_values(".env")
 
 def parse_posts() -> list:
     logger.info('Trying to parse habr.com via RSS...')
@@ -43,12 +48,13 @@ def update_db(posts_parsed: list) -> None:
     logger.info('Trying to connect database...')
 
     try:
-        connection = connect(dbname='',
-                             user='',
-                             password='',
-                             host='')
+        connection = connect(dbname=config.get("DATABASE"),
+                             user=config.get("DB_USER"),
+                             password=config.get("DB_PASSWORD"),
+                             host=config.get("DB_HOST"))
         cursor = connection.cursor()
         logger.info('Successfully connected to database!')
+        
 
         for post in posts_parsed:
             cursor.execute(f'SELECT * FROM public.posts WHERE post_id={post["post_id"]}')
@@ -68,12 +74,15 @@ def update_db(posts_parsed: list) -> None:
         exit(-1)
 
     finally:
+        cursor.execute(f'SELECT * FROM public.posts ORDER BY post_id DESC LIMIT 1')
+        last_post_link = cursor.fetchall()[0][2]
+        logger.info(f'Last Post in Database - {last_post_link}')
         connection.close()
         logger.info('Database successfully updated!')
 
 
 def main():
-    logger.add('parser.log', format='{time} | {level} | {message}',
+    logger.add(f'parser-{strftime("%Y%m%d")}.log', format='{time:HH:mm:ss} | {level} | {message}',
                level='DEBUG',
                rotation='15 KB',
                compression='zip')
