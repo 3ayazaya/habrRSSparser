@@ -1,4 +1,7 @@
 # habrRSSparser
+
+![habrRSSParser](https://user-images.githubusercontent.com/22868859/145724745-38fc2184-21e7-4525-a3ce-fdbc7eb58776.png)
+
 ## _Parse and read simple_
 
 habrRSSparser is a python script for parsing habs from habr.com via RSS and write them to PostgreSQL database.
