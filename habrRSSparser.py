@@ -10,6 +10,7 @@ from dotenv import dotenv_values
 
 config = dotenv_values(".env")
 
+
 def parse_posts() -> list:
     logger.info('Trying to parse habr.com via RSS...')
 
@@ -45,6 +46,7 @@ def parse_posts() -> list:
 
 
 def update_db(posts_parsed: list) -> None:
+    global cursor, connection
     logger.info('Trying to connect database...')
 
     try:
@@ -54,7 +56,6 @@ def update_db(posts_parsed: list) -> None:
                              host=config.get("DB_HOST"))
         cursor = connection.cursor()
         logger.info('Successfully connected to database!')
-        
 
         for post in posts_parsed:
             cursor.execute(f'SELECT * FROM public.posts WHERE post_id={post["post_id"]}')
