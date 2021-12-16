@@ -11,7 +11,7 @@ habrRSSparser is a python script for parsing habs from habr.com via RSS and writ
 ## Features
 
 
-- Change sections
+- Change section
 - Set PostgreSQL databae scheme
 
 ## Installation
