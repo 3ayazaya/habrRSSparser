@@ -2,7 +2,7 @@
 on:
   push:
     branches:
-      - master
+      - 3ayazaya/matrix-commit
 
 jobs:
   matrix_action_job:
