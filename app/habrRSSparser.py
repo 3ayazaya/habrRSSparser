@@ -83,7 +83,7 @@ def update_db(posts_parsed: list) -> None:
 
 
 def main():
-    logger.add(f'parser-{strftime("%Y%m%d")}.log', format='{time:HH:mm:ss} | {level} | {message}',
+    logger.add(f'/app/logs/parser-{strftime("%Y%m%d")}.log', format='{time:HH:mm:ss} | {level} | {message}',
                level='DEBUG',
                rotation='15 KB',
                compression='zip')
