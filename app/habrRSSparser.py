@@ -5,7 +5,7 @@ from loguru import logger
 import feedparser
 from psycopg2 import connect
 import re
-from time import strftime
+from time import strftime, sleep
 from dotenv import dotenv_values
 
 config = dotenv_values(".env")
@@ -53,7 +53,7 @@ def update_db(posts_parsed: list) -> None:
         connection = connect(dbname=config.get("DATABASE"),
                              user=config.get("DB_USER"),
                              password=config.get("DB_PASSWORD"),
-                             host=config.get("DB_HOST"))
+                             host="db")
         cursor = connection.cursor()
         logger.info('Successfully connected to database!')
 
@@ -100,4 +100,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    while True:
+        main()
+        sleep(300)
