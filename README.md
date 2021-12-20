@@ -4,9 +4,7 @@
 
 ## _Parse and read simple_
 
-habrRSSparser is a python script for parsing habs from habr.com via RSS and write them to PostgreSQL database.
-
-![working](https://user-images.githubusercontent.com/22868859/144743169-b5e1cb37-26bf-4504-bfae-b900ec2dbc63.gif)
+**habrRSSparser** is a python script for parsing habs from habr.com via RSS and write them to PostgreSQL database.
 
 ## Features
 
@@ -14,37 +12,27 @@ habrRSSparser is a python script for parsing habs from habr.com via RSS and writ
 - Change sections
 - Set PostgreSQL databae scheme
 
-## Installation
+## Install app
 
-habrRSSparser requires [Python](https://www.python.org/) v3.8+  and PostgreSQL client binary to run.
+habrRSSparser requires `docker` and `docker-compose` to run.
 
-### For MacOS set PostgreSQL PATH
-
-Set PATH
-
-```sh
-PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/
-```
-
-Create venv and install the dependencies
-
-```sh
+Clone repo
+```shell
 git clone https://github.com/3ayazaya/habrRSSparser
 cd habrRSSparser
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-chmod +x habrRSSparser.py
 ```
 
-Create .env file
-
-```sh
-touch .env
+Create **.env** file
+```shell
+touch app/.env
 ```
 
-Configure .env file
+Configure **.env** file
 
+```shell
+vim app/.env
+```
+Paste and configure
 ```
 DB_USER='<YOUR_DATABASE_USER_FOR_CONNECTION>'
 DB_HOST='<YOUR_DATABASE_IP_OR_URL_FOR_CONNECTION>'
@@ -52,10 +40,31 @@ DATABASE='<YOUR_DATABASE_NAME_FOR_CONNECTION>'
 DB_PASSWORD='<YOUR_DATABASE_USER_PASSWORD_FOR_CONNECTION>'
 ```
 
-Start parsing
-```sh
-./habrRSSparser.py
+## Build app
+
+Build app with docker-compose
+```shell
+docker-compose build
 ```
+
+## Run app
+Running app with docker-compose
+```shell
+docker-compose up
+```
+
+## Crontab
+For automatization you can run this app via **cron**
+```shell
+crontab -e
+```
+And write for example (start every 5 min):
+```editorconfig
+*/5 * * * * /usr/local/bin/docker-compose -f /<FULL_PATH_TO_HABRRSSPARSER_FOLDER>/docker-compose.yml start > /dev/null
+```
+## Logs
+Logs are stored in `app/logs` folder
+
 ## Modules
 
 habrRSSparser is currently use the following plugins.
