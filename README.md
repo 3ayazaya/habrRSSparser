@@ -6,12 +6,6 @@
 
 **habrRSSparser** is a python script for parsing habs from habr.com via RSS and write them to PostgreSQL database.
 
-## Features
-
-
-- Change sections
-- Set PostgreSQL databae scheme
-
 ## Install app
 
 habrRSSparser requires `docker` and `docker-compose` to run.
@@ -35,33 +29,27 @@ vim app/.env
 Paste and configure
 ```
 DB_USER='<YOUR_DATABASE_USER_FOR_CONNECTION>'
-DB_HOST='<YOUR_DATABASE_IP_OR_URL_FOR_CONNECTION>'
 DATABASE='<YOUR_DATABASE_NAME_FOR_CONNECTION>'
 DB_PASSWORD='<YOUR_DATABASE_USER_PASSWORD_FOR_CONNECTION>'
 ```
 
 ## Build app
-
-Build app with docker-compose
+Set **env**
+```shell
+set -a
+source app/.env
+```
+Build app with _docker-compose_
 ```shell
 docker-compose build
 ```
 
 ## Run app
-Running app with docker-compose
+Running app with _docker-compose_
 ```shell
-docker-compose up
+docker-compose up -d
 ```
 
-## Crontab
-For automatization you can run this app via **cron**
-```shell
-crontab -e
-```
-And write for example (start every 5 min):
-```editorconfig
-*/5 * * * * /usr/local/bin/docker-compose -f /<FULL_PATH_TO_HABRRSSPARSER_FOLDER>/docker-compose.yml start > /dev/null
-```
 ## Logs
 Logs are stored in `app/logs` folder
 
